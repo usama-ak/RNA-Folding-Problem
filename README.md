@@ -1,1 +1,1 @@
-# RNA-Folding-Problem
+# RNA Folding Problem

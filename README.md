@@ -26,7 +26,7 @@ python gibbs_estimation.py --pdb-file path/to/your/pdb/file.pdb --scores-dir pat
 The `--pdb-file` argument specifies the path to the PDB file containing the RNA structure for which you want to calculate the Gibbs free energy.    
 You can also specify the `--scores-dir` argument to provide a custom directory containing score files. If not specified, it defaults to `data/scores/`.
 
-Alternatively, if you don't specify a PDB file, the script will process example files located in the data/examples/ directory:
+Alternatively, if you don't specify a PDB file, the script will process example files located in the `data/examples/` directory:
 
 ```bash
 python gibbs_estimation.py

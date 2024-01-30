@@ -19,7 +19,7 @@ generate_plots <- function(pair_df, pair_name) {
          y = "Pseudo-Energy Score") +
     theme_minimal() + 
     theme(plot.title = element_text(hjust = 0.5),
-          plot.background = element_rect(fill = "white"))  # Set background color to white
+          plot.background = element_rect(fill = "white"))
 }
 
 # Read the CSV file

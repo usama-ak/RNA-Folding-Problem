@@ -44,8 +44,8 @@ python gibbs_estimation.py
 
 ## Scripts 
 
-- `src/plot_scoring_profiles.r`: R script for plotting scoring profiles
 - `src/obj_funct_training.py`: Python script for training the objective function, generating scores files
+- `src/plot_scoring_profiles.r`: R script for plotting scoring profiles
 - `gibbs_estimation.py`: Main python script for calculating Gibbs free energy of an RNA structure 
 
 

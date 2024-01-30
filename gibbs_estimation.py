@@ -63,7 +63,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Calculate Gibbs free energy for RNA structures")
     parser.add_argument("--pdb-file", help="Path to the PDB file containing the RNA structure")
     parser.add_argument("--scores-dir", default="data/scores/", help="Directory containing score files")
-    parser.add_argument("--examples-dir", default="data/examples/", help="Directory containing example files")
     args = parser.parse_args()
 
     if args.pdb_file:
@@ -73,9 +72,10 @@ if __name__ == "__main__":
         print(f"Estimated Gibbs Free Energy: {gibbs_free_energy}")
     else:
         # No PDB file specified, process example files from the examples directory
-        for file_name in os.listdir(args.examples_dir):
+        examples_dir = "data/examples/"
+        for file_name in os.listdir(examples_dir):
             if file_name.endswith(".pdb"):
-                example_file_path = os.path.join(args.examples_dir, file_name)
+                example_file_path = os.path.join(examples_dir, file_name)
                 calculator = GibbsFreeEnergyCalculator(example_file_path, args.scores_dir)
                 gibbs_free_energy = calculator.calculate_gibbs_free_energy()
                 print(f"Gibbs Free Energy for {file_name}: {gibbs_free_energy}")

@@ -26,24 +26,14 @@ def linear_interpolation(distance, scores):
     - scores: List of scores for intervals of distances between C3' atoms.
 
     Returns:
-    - Score computed using linear interpolation.
+    - Score corresponding to the interval where the distance falls.
     """
     interval_index = int(distance)
     if interval_index < 0 or interval_index >= len(scores):
         return float('inf')  # Distance falls outside the valid range
 
-    # Handle the upper bound of the range separately
-    if interval_index == len(scores) - 1:
-        return scores[-1]
+    return scores[interval_index]
 
-    # Calculate the fractional distance within the interval
-    fractional_distance = distance - interval_index
-
-    # Compute linear interpolation
-    score_low = scores[interval_index]
-    score_high = scores[interval_index + 1]
-    interpolated_score = score_low + fractional_distance * (score_high - score_low)
-    return interpolated_score
 
 def calculate_gibbs_free_energy(scores):
     """

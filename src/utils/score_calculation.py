@@ -46,7 +46,7 @@ def calculate_gibbs_free_energy(scores):
     - The estimated Gibbs free energy.
     """
     # Filter out 'NaN' values
-    scores = [score for score in scores if not math.isnan(score)]
+    scores = [score for score in scores if not (math.isnan(score) or math.isinf(score))]
     
     # Calculate sum of non-'NaN' scores
     return sum(scores)

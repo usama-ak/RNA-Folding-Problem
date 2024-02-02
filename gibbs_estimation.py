@@ -32,7 +32,7 @@ class GibbsFreeEnergyCalculator:
         distances = calculate_distances(pdb_values)
 
         # Initialize a dictionary to store scores for each pair
-        interpolated_scores = {}
+        all_scores = {}
 
         # Iterate over distances and calculate scores
         for distance in distances:
@@ -49,13 +49,13 @@ class GibbsFreeEnergyCalculator:
             scores = read_scores(full_score_file_path)
 
             # Calculate score for current distance using linear interpolation
-            score = linear_interpolation(distance_value, scores)
+            score = GetScore(distance_value, scores)
 
             # Store the score
-            interpolated_scores[distance_key] = score
+            all_scores[distance_key] = score
 
         # Calculate Gibbs free energy
-        gibbs_free_energy = calculate_gibbs_free_energy(interpolated_scores.values())
+        gibbs_free_energy = calculate_gibbs_free_energy(all_scores.values())
 
         return gibbs_free_energy
 

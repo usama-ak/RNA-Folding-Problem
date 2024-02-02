@@ -17,7 +17,7 @@ def read_scores(score_file):
             scores.append(score)
     return scores
 
-def GetScores(distance, scores):
+def GetScore(distance, scores):
     """
     Perform linear interpolation to calculate a score based on the distance.
 

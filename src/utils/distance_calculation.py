@@ -14,13 +14,15 @@ def calculate_distances(values_list):
     distances_list = []
 
     for i in range(len(values_list)):
+        ## Here, we want to make sure to take into account residues separated by at least 3 positions on the sequence
         for j in range(i + 4, len(values_list)):
-            # Check if residues belong to the same chain before calculating distance
+            ## Then, we check if residues belong to the same chain before calculating distance
             if values_list[i][2] == values_list[j][2]:
                 d = sqrt(pow(float(values_list[i][4]) - float(values_list[j][4]), 2) +
                          pow(float(values_list[i][5]) - float(values_list[j][5]), 2) +
                          pow(float(values_list[i][6]) - float(values_list[j][6]), 2))
                 if d <= 20:
+                    ## The distances that are less or equal than 20 Anstrom are kept
                     distances_list.append([values_list[i][1], values_list[j][1], d])
 
     return distances_list
@@ -57,13 +59,13 @@ def compute_observed_frequency(associations):
     """
     observed_frequency = {}
     for pair, distances in associations.items():
-        # Initialize a list with 20 intervals
+        ## Here, we initialize a list with 20 intervals
         interval_counts = [0] * 20
-        # Count the occurrences of each distance within the intervals
+        ## Then, we want to count the occurrences of each distance within the intervals
         for distance in distances:
             interval_index = int(distance / 1)
             interval_counts[interval_index] += 1
-        # Compute the observed frequency for each interval
+        ## Finally, we compute the observed frequency for each interval and return this frequency
         observed_frequency[pair] = [count / len(distances) if len(distances) > 0 else 0 for count in interval_counts]
     
     return observed_frequency
@@ -103,7 +105,7 @@ def compute_pseudo_energy(observed_frequency, reference_frequency):
     for pair, observed_interval in observed_frequency.items():
         reference_interval = reference_frequency  
 
-        # Compute pseudo-energy scores for each interval
+        ## Here,  the idea is to compute pseudo-energy scores for each interval [0 to 20]
         scores = []
         for obs, ref in zip(observed_interval, reference_interval):
             if ref != 0 and obs != 0:

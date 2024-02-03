@@ -4,7 +4,7 @@ from src.utils.distance_calculation import calculate_distances
 from src.utils.file_io import read_pdb
 from src.utils.score_calculation import read_scores, GetScore, calculate_gibbs_free_energy
 
-## This class has been created to estimate GibbsFreeEnergy of PDB files coming from the RNA puzzle dataset
+## This class has been created to estimate GibbsFreeEnergy of PDB files coming from the PDB database
 class GibbsFreeEnergyCalculator:
     def __init__(self, pdb_file_path, scores_dir="data/scores/"):
         self.pdb_file_path = pdb_file_path

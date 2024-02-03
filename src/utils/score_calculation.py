@@ -30,7 +30,7 @@ def GetScore(distance, scores):
     """
     interval_index = int(distance)
     if interval_index < 0 or interval_index >= len(scores):
-        return float('inf')  # Distance falls outside the valid range
+        return float('inf')  ## If the distance falls outside the valid range, the obtained value is equal to inf.
 
     return scores[interval_index]
 

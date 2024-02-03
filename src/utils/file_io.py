@@ -13,36 +13,37 @@ def read_pdb(file_path):
     """
     values_list = []
     model_found = False
+    ## Here, we open a pdb file
     with open(file_path, "r") as pdbfile:
         for line in pdbfile:
             if line.startswith("MODEL") and "1" in line:
                 model_found = True
             elif model_found and line.startswith("ATOM"):
-                # Define column positions for relevant information
+                ## Then we define column positions to extract information that we need
                 column_positions = [
-                    (11, 18),    # atom
-                    (19, 20),    # nucleotide
-                    (21, 22),    # chain
-                    (23, 26),    # residue number
-                    (27, 37),    # X
-                    (38, 45),    # Y
-                    (46, 53)     # Z
+                    (11, 18),    ## atom
+                    (19, 20),    ## nucleotide
+                    (21, 22),    ## chain
+                    (23, 26),    ## residue number
+                    (27, 37),    ## X
+                    (38, 45),    ## Y
+                    (46, 53)     ## Z
                 ]
                 values = [line[start:end].strip() for start, end in column_positions]
                 if values[0] == "C3'":
                     values_list.append(values)
-            elif model_found and line.startswith("ENDMDL"):
-                break  # Stop reading at the end of the first model
-            elif not model_found and line.startswith("ATOM"):
-                # Define column positions for relevant information
+            elif model_found and line.startswith("ENDMDL"): ## In case the file contains many models
+                break  ## We add a break condition to stop reading the pdb file at the end of the first model
+            elif not model_found and line.startswith("ATOM"): ## If it is not the case :
+                ## We once again define column positions for relevant information
                 column_positions = [
-                    (11, 18),    # atom
-                    (19, 20),    # nucleotide
-                    (21, 22),    # chain
-                    (23, 26),    # residue number
-                    (27, 37),    # X
-                    (38, 45),    # Y
-                    (46, 53)     # Z
+                    (11, 18),    ## atom
+                    (19, 20),    ## nucleotide
+                    (21, 22),    ## chain
+                    (23, 26),    ## residue number
+                    (27, 37),    ## X
+                    (38, 45),    ## Y
+                    (46, 53)     ## Z
                 ]
                 values = [line[start:end].strip() for start, end in column_positions]
                 if values[0] == "C3'":
@@ -80,9 +81,9 @@ def generate_csv(pseudo_energy_scores, csv_filename):
     """
     with open(csv_filename, 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-        # Write header
+        ## Header is written on the csv file
         csv_writer.writerow(['Nucleotide 1', 'Nucleotide 2'] + [f'Score_{i}' for i in range(1, 21)])
-        # Write data
+        ## Then the data is written on the same file
         for pair, scores in pseudo_energy_scores.items():
             nucleotide_1, nucleotide_2 = pair
             scores = scores[:]
